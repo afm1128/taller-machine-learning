@@ -25,7 +25,7 @@ simplefilter(action='ignore', category=FutureWarning)
 simplefilter(action='ignore', category=ConvergenceWarning)
 
 #Importamos la Data
-url = ''
+url = 'bank-full.csv'
 data = pd.read_csv(url)
 
 #ahora remplazaremos todos los valores que hay por datos numericos
