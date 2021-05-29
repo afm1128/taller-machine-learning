@@ -115,17 +115,6 @@ def matriz_confusion_auc(model, x_test, y_test, y_pred):
     AUC = roc_auc_score(y_test, probs)
     return matriz_confusion, AUC, fpr, tpr
 
-def show_roc_curve_matrix(fpr, tpr, matriz_confusion):
-    sns.heatmap(matriz_confusion)
-    plt.show()
-    plt.plot(fpr, tpr, color='orange', label='ROC')
-    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
-    plt.legend()
-    plt.show()
-    
 def mostrar_resultados(y_test, pred_y):
     conf_matrix = confusion_matrix(y_test, pred_y)
     plt.figure(figsize=(6, 6))
