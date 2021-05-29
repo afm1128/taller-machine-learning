@@ -266,43 +266,28 @@ print("Métricas árbol de decisión: ")
 mostrar_resultados(y_test, y_predAD)
 
 
-# 7. Mostrar las 5 curvas de ROC en el mismo gráfico 
+# 7. Mostrar las 5 curvas de ROC en el mismo gráfico
 plt.figure(figsize=(25, 10))
 
 #Regresion Logistica
-probRL = modelRL.predict_proba(x_test)
-probRL = probRL[:, 1]
-fprRL, tprRL, _ = roc_curve(y_test, probRL)
-plt.plot(fprRL, tprRL, label='ROC regresión logistica')
+
+plot_roc_curve(fprRL, tprRL, label='ROC regresión logistica')
+
 
 #Gausiano
-probGA = modelGA.predict_proba(x_test)
-probGA = probGA[:, 1]
-fprGA, tprGA, _ = roc_curve(y_test, probGA)
-plt.plot(fprGA, tprGA, label='ROC gausiano')
+
+plot_roc_curve(fprGA, tprGA, label='ROC gausiano')
 
 #Perceptron Multicapa
-probPM = modelPM.predict_proba(x_test)
-probPM = probPM[:, 1]
-fprPM, tprPM, _ = roc_curve(y_test, probPM)
-plt.plot(fprPM, tprPM, label='ROC preceptrón multicapa')
+
+plot_roc_curve(fprPM, tprPM, label='ROC preceptrón multicapa')
+
 
 #Vecinos Cercanos
-probVC = modelVC.predict_proba(x_test)
-probVC = probVC[:, 1]
-fprVC, tprVC, _ = roc_curve(y_test, probVC)
-plt.plot(fprVC, tprVC, label='ROC vecinos cercanos')
+
+plot_roc_curve(fprVC, tprVC, label='ROC vecinos cercanos')
 
 #Árbol de Decision
-probAD = modelAD.predict_proba(x_test)
-probAD = probAD[:, 1]
-fprAD, tprAD, _ = roc_curve(y_test, probAD)
-plt.plot(fprAD, tprAD, label='ROC árbol de decisión')
 
-plt.plot([0, 1], [0, 1], color='black', label='Línea de NO discriminacion')
-plt.xlabel('Tasa de falsos positivos')
-plt.ylabel('Tasa de verdaderos positivos')
-plt.title('Curvas de ROC')
-plt.legend()
-plt.show()
+plot_roc_curve(fprAD, tprAD, label='ROC árbol de decisión')
 

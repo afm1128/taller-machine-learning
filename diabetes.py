@@ -25,7 +25,7 @@ simplefilter(action='ignore', category=FutureWarning)
 simplefilter(action='ignore', category=ConvergenceWarning)
 
 #Importamos la Data
-url = ''
+url = 'diabetes.csv'
 data = pd.read_csv(url)
 
 #Reemplazar los valores que son NaN
@@ -108,17 +108,6 @@ def matriz_confusion_auc(model, x_test, y_test, y_pred):
     fpr, tpr, _ = roc_curve(y_test, probs)
     AUC = roc_auc_score(y_test, probs)
     return matriz_confusion, AUC, fpr, tpr
-
-def show_roc_curve_matrix(fpr, tpr, matriz_confusion):
-    sns.heatmap(matriz_confusion)
-    plt.show()
-    plt.plot(fpr, tpr, color='orange', label='ROC')
-    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
-    plt.legend()
-    plt.show()
     
 def mostrar_resultados(y_test, pred_y):
     conf_matrix = confusion_matrix(y_test, pred_y)
@@ -257,46 +246,25 @@ mostrar_resultados(y_test, y_predAD)
 plt.figure(figsize=(25, 10))
 
 #Regresion Logistica
-probRL = modelRL.predict_proba(x_test)
-probRL = probRL[:, 1]
-auc = roc_auc_score(y_test, probRL)
-fprRL, tprRL, _ = roc_curve(y_test, probRL)
+
 plot_roc_curve(fprRL, tprRL, label='ROC regresión logistica')
 
 
 #Gausiano
-probGA = modelGA.predict_proba(x_test)
-probGA = probGA[:, 1]
-auc = roc_auc_score(y_test, probGA)
-fprGA, tprGA, _ = roc_curve(y_test, probGA)
+
 plot_roc_curve(fprGA, tprGA, label='ROC gausiano')
 
 #Perceptron Multicapa
-probPM = modelPM.predict_proba(x_test)
-probPM = probPM[:, 1]
-auc = roc_auc_score(y_test, probPM)
-fprPM, tprPM, _ = roc_curve(y_test, probPM)
+
 plot_roc_curve(fprPM, tprPM, label='ROC preceptrón multicapa')
 
 
 #Vecinos Cercanos
-probVC = modelVC.predict_proba(x_test)
-probVC = probVC[:, 1]
-auc = roc_auc_score(y_test, probVC)
-fprVC, tprVC, _ = roc_curve(y_test, probVC)
+
 plot_roc_curve(fprVC, tprVC, label='ROC vecinos cercanos')
 
 #Árbol de Decision
-probAD = modelAD.predict_proba(x_test)
-probAD = probAD[:, 1]
-auc = roc_auc_score(y_test, probAD)
-fprAD, tprAD, _ = roc_curve(y_test, probAD)
+
 plot_roc_curve(fprAD, tprAD, label='ROC árbol de decisión')
 
 
-plt.plot([0, 1], [0, 1], color='black', label='Línea de NO discriminacion')
-plt.xlabel('Tasa de falsos positivos')
-plt.ylabel('Tasa de verdaderos positivos')
-plt.title('Curvas de ROC')
-plt.legend()
-plt.show()
